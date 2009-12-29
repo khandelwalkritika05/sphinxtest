@@ -14,13 +14,20 @@ import java.util.Vector;
 
 public class Nagusia {
 
-	static String acModelFile = "/home/blizarazu/Babelia/acoustic_model_files";
 	// static String dicFile =
 	// "/home/blizarazu/Babelia/acoustic_model_files/dict";
+	
+	/*static String acModelFile = "/home/blizarazu/Babelia/acoustic_model_files";
 	static String file = "/home/blizarazu/Dropbox/Babelia/speech_aldatuta";
 	static String saveFolder = "/home/blizarazu/Babelia/Angel_Heart-The_Egg_Scene";
+	static String fileName = "babelia";*/
+	
+	static String acModelFile = "";
+	static String file = "";
+	static String saveFolder = "";
+	static String fileName = "";
+	
 	static String log = "";
-	static String fileName = "babelia";
 
 	static HashMap<String, Vector<String>> voca;
 
@@ -28,6 +35,16 @@ public class Nagusia {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
+		if(args.length < 3){
+			System.out.println("Missing parameters: specify the foldel with the acoustic model files, the file with text, the name for the grammar files and the folder for saving the grammar files");
+			System.exit(1);
+		}
+		
+		acModelFile = args[0];
+		file = args[1];
+		fileName = args[2];
+		saveFolder = args[3];
 
 		Hiztegia h = new Hiztegia(acModelFile + File.separator + "dict");
 		voca = new HashMap<String, Vector<String>>();
