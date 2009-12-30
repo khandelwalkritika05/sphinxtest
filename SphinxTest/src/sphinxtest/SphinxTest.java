@@ -292,8 +292,8 @@ public class SphinxTest {
 		if (!log.isEmpty()) {
 			String header = "Speaker level: " + speakerLevel.toUpperCase()
 					+ "\n" + "Sentence: " + actualSentence + "\n"
-					+ "------------------------------" + "\n\n\n" + log
-					+ "-------------------------------\n" + "Total correct: "
+					+ "------------------------------" + "\n\n\n"
+					+ "Total correct: "
 					+ totalCorrect + " ; Total incorrect: " + totalIncorrect;
 			log = header + "\n\n\n=======RESULTS======" + log;
 
