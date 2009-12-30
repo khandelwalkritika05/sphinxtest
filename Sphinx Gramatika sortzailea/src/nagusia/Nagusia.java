@@ -68,7 +68,8 @@ public class Nagusia {
 
 				if (lerroBerri != null && lerroBerri.length() != 0) {
 					// lerroKont++;
-					esaldiak.addElement(lerroBerri.toLowerCase());
+					if (!esaldiak.contains(lerroBerri.toLowerCase()))
+						esaldiak.addElement(lerroBerri.toLowerCase());
 					Vector<String> v = new Vector<String>(Arrays
 							.asList(lerroBerri.split(" ")));
 					for (String s : v) {
@@ -117,7 +118,8 @@ public class Nagusia {
 		if (!file.exists())
 			file.mkdirs();
 
-		String grammarEdukia = "grammar " + esaldia.replace(' ', '_') + "_" + name + ";\n\n";
+		String grammarEdukia = "grammar " + esaldia.replace(' ', '_') + "_"
+				+ name + ";\n\n";
 		grammarEdukia += "public <commands> = " + esaldia.toLowerCase();
 
 		try {
@@ -128,7 +130,8 @@ public class Nagusia {
 			out.write(grammarEdukia);
 			// Close the output stream
 			out.close();
-			log += "GRAMMAR CREATED: " + esaldia.replace(' ', '_') + "_" + name + ".gram\n";
+			log += "GRAMMAR CREATED: " + esaldia.replace(' ', '_') + "_" + name
+					+ ".gram\n";
 		} catch (Exception e) {// Catch exception if any
 			System.err.println("Error: " + e.getMessage());
 		}
@@ -147,7 +150,8 @@ public class Nagusia {
 		if (!file.exists())
 			file.mkdirs();
 
-		String grammarEdukia = "grammar " + esaldia.replace(' ', '_') + "_" + name + ";\n\n";
+		String grammarEdukia = "grammar " + esaldia.replace(' ', '_') + "_"
+				+ name + ";\n\n";
 		grammarEdukia += "public <commands> =";
 
 		int hitzKop = esaldia.toLowerCase().split(" ").length;
@@ -166,7 +170,8 @@ public class Nagusia {
 			out.write(grammarEdukia);
 			// Close the output stream
 			out.close();
-			log += "GRAMMAR CREATED: " + esaldia.replace(' ', '_') + "_" + name + ".gram\n";
+			log += "GRAMMAR CREATED: " + esaldia.replace(' ', '_') + "_" + name
+					+ ".gram\n";
 		} catch (Exception e) {// Catch exception if any
 			System.err.println("Error: " + e.getMessage());
 		}
@@ -185,7 +190,8 @@ public class Nagusia {
 		if (!file.exists())
 			file.mkdirs();
 
-		String grammarEdukia = "grammar " + esaldia.replace(' ', '_') + "_" + name + ";\n\n";
+		String grammarEdukia = "grammar " + esaldia.replace(' ', '_') + "_"
+				+ name + ";\n\n";
 		grammarEdukia += "public <commands> =";
 
 		int hitzKop = esaldia.toLowerCase().split(" ").length;
@@ -210,7 +216,8 @@ public class Nagusia {
 			out.write(grammarEdukia);
 			// Close the output stream
 			out.close();
-			log += "GRAMMAR CREATED: " + esaldia.replace(' ', '_') + "_" + name + ".gram\n";
+			log += "GRAMMAR CREATED: " + esaldia.replace(' ', '_') + "_" + name
+					+ ".gram\n";
 		} catch (Exception e) {// Catch exception if any
 			log += "makeHitzKopurkaGrammar: " + e.getMessage() + "\n";
 			System.err.println("Error: " + e.getMessage());
