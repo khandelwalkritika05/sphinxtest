@@ -213,8 +213,14 @@ public class SphinxTest {
 							System.out.println("Grammar " + grammarName
 									+ " doesn't exist");
 						}
-					}else if(resp2 == -1)
+					}else if(resp2 == -1){
+						writeLog();
+						actualSentence = "";
+
+						totalCorrect = 0;
+						totalIncorrect = 0;
 						break;
+					}
 				}
 			}else if(resp1 == -1)
 				break;
@@ -263,11 +269,6 @@ public class SphinxTest {
 		}
 
 		logResult(results, correct, incorrect, grammarName);
-		writeLog();
-		actualSentence = "";
-
-		totalCorrect = 0;
-		totalIncorrect = 0;
 	}
 
 	private void logResult(String results, int correct, int incorrect,
@@ -295,7 +296,7 @@ public class SphinxTest {
 					+ "------------------------------" + "\n\n\n"
 					+ "Total correct: "
 					+ totalCorrect + " ; Total incorrect: " + totalIncorrect;
-			log = header + "\n\n\n=======RESULTS======" + log;
+			log = header + "\n\n\n=======RESULTS======\n" + log;
 
 			File file = new File(logPath);
 			if (!file.exists())
