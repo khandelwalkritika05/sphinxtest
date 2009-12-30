@@ -68,14 +68,24 @@ public class Nagusia {
 
 				if (lerroBerri != null && lerroBerri.length() != 0) {
 					// lerroKont++;
-					if (!esaldiak.contains(lerroBerri.toLowerCase()))
-						esaldiak.addElement(lerroBerri.toLowerCase());
 					Vector<String> v = new Vector<String>(Arrays
 							.asList(lerroBerri.split(" ")));
+
+					boolean doPhrase = true;
 					for (String s : v) {
-						s = s.toLowerCase();
-						if (!allWords.contains(s))
-							allWords.addElement(s);
+						if (!h.contains(s)) {
+							doPhrase = false;
+							break;
+						}
+					}
+					if (doPhrase) {
+						if (!esaldiak.contains(lerroBerri.toLowerCase()))
+							esaldiak.addElement(lerroBerri.toLowerCase());
+						for (String s : v) {
+							s = s.toLowerCase();
+							if (!allWords.contains(s))
+								allWords.addElement(s);
+						}
 					}
 				}
 			}
@@ -94,10 +104,10 @@ public class Nagusia {
 
 			System.out.println("\n\n==============ESALDIAK==============\n");
 			for (String s1 : esaldiak)
-				System.out.println("\"" + s1 + "\"");
+				System.out.println("\"" + s1 + "\",");
 			System.out.println("\n\n==============MOTAK==============\n");
 			for (String s2 : motak)
-				System.out.println("\"" + s2 + "\"");
+				System.out.println("\"" + s2 + "\",");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
