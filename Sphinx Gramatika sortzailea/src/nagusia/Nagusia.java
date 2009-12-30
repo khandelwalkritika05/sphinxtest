@@ -131,7 +131,7 @@ public class Nagusia {
 
 		String grammarEdukia = "grammar " + esaldia.replace(' ', '_') + "_"
 				+ name + ";\n\n";
-		grammarEdukia += "public <commands> = " + esaldia.toLowerCase();
+		grammarEdukia += "public <commands> = " + esaldia.toLowerCase() + ";";
 
 		try {
 			// Create file
@@ -171,7 +171,7 @@ public class Nagusia {
 		grammarEdukia += ";\n\n";
 
 		grammarEdukia += "public <word> = "
-				+ esaldia.toLowerCase().replace(" ", " | ");
+				+ esaldia.toLowerCase().replace(" ", " | ") + ";";
 
 		try {
 			// Create file
