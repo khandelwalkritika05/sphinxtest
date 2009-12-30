@@ -209,12 +209,6 @@ public class SphinxTest {
 					}
 					actualTestType = "";
 				}
-				writeLog();
-
-				actualSentence = "";
-
-				totalCorrect = 0;
-				totalIncorrect = 0;
 			}
 		}
 	}
@@ -253,6 +247,12 @@ public class SphinxTest {
 					results += "\n\n" + recogResultText + "\nINCORRECT";
 					incorrect++;
 				} else if (resp.equalsIgnoreCase("R")) {
+					writeLog();
+
+					actualSentence = "";
+
+					totalCorrect = 0;
+					totalIncorrect = 0;
 					break;
 				}
 			} else {
