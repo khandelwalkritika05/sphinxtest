@@ -265,15 +265,15 @@ public class SphinxTest {
 
 	private void logResult(String results, int correct, int incorrect,
 			String grammarName) {
-		log += "=============================================================================";
-		log += "  Sentence: " + actualSentence;
-		log += "  Test type: " + actualTestType;
-		log += "  Grammar name:" + grammarName;
+		log += "=============================================================================\n";
+		log += "  Sentence: " + actualSentence + "\n";
+		log += "  Test type: " + actualTestType + "\n";
+		log += "  Grammar name:" + grammarName + "\n";
 		log += "=============================================================================";
 		log += "\n\n";
-		log += results;
+		log += "Result: " + results;
 		log += "\n\n";
-		log += "-----------";
+		log += "-----------\n";
 		log += "Correct: " + correct + "; Incorrect: " + incorrect;
 		log += "\n\n\n";
 
@@ -283,11 +283,12 @@ public class SphinxTest {
 
 	private void writeLog() {
 		if (!log.isEmpty()) {
-			log += "Speaker level: " + speakerLevel.toUpperCase()
-					+ "Sentence: " + actualSentence
+			String header = "Speaker level: " + speakerLevel.toUpperCase()
+					+ "\n" + "Sentence: " + actualSentence + "\n"
 					+ "------------------------------" + "\n\n\n" + log
-					+ "-------------------------------" + "Total correct: "
+					+ "-------------------------------\n" + "Total correct: "
 					+ totalCorrect + " ; Total incorrect: " + totalIncorrect;
+			log = header + "\n\n\n=======RESULTS======" + log;
 
 			File file = new File(logPath);
 			if (!file.exists())
@@ -295,7 +296,8 @@ public class SphinxTest {
 
 			try {
 				FileWriter fstream = new FileWriter(logPath + File.separator
-						+ actualSentence.replace(" ", "_") + "_" + speakerLevel + "_results");
+						+ actualSentence.replace(" ", "_") + "_" + speakerLevel
+						+ "_results");
 				BufferedWriter out = new BufferedWriter(fstream);
 				out.write(log);
 				out.close();
