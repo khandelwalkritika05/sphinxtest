@@ -255,10 +255,10 @@ public class SphinxTest {
 				}
 
 				if (resp.equalsIgnoreCase("C")) {
-					results += "\n\n" + recogResultText + "\nCORRECT";
+					results += "\n\nResult: " + recogResultText + "\nCORRECT";
 					correct++;
 				} else if (resp.equalsIgnoreCase("I")) {
-					results += "\n\n" + recogResultText + "\nINCORRECT";
+					results += "\n\nResult: " + recogResultText + "\nINCORRECT";
 					incorrect++;
 				} else if (resp.equalsIgnoreCase("R")) {
 					break;
@@ -279,7 +279,7 @@ public class SphinxTest {
 		log += "  Grammar name:" + grammarName + "\n";
 		log += "=============================================================================";
 		log += "\n\n";
-		log += "Result: " + results;
+		log += results;
 		log += "\n\n";
 		log += "-----------\n";
 		log += "Correct: " + correct + "; Incorrect: " + incorrect;
