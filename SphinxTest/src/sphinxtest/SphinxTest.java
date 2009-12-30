@@ -273,6 +273,7 @@ public class SphinxTest {
 
 	private void logResult(String results, int correct, int incorrect,
 			String grammarName) {
+		log = "";
 		log += "=============================================================================\n";
 		log += "  Sentence: " + actualSentence + "\n";
 		log += "  Test type: " + actualTestType + "\n";
