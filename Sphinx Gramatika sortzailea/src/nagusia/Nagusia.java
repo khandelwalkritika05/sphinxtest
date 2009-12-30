@@ -15,13 +15,12 @@ public class Nagusia {
 	// static String dicFile =
 	// "/home/blizarazu/Babelia/acoustic_model_files/dict";
 
-	/*
-	 * static String acModelFile =
-	 * "/home/blizarazu/Babelia/acoustic_model_files"; static String file =
-	 * "/home/blizarazu/Dropbox/Babelia/speech_aldatuta"; static String
-	 * saveFolder = "/home/blizarazu/Babelia/Angel_Heart-The_Egg_Scene"; static
-	 * String fileName = "babelia";
-	 */
+	// static String acModelFile =
+	// "/home/blizarazu/Babelia/acoustic_model_files";
+	// static String file = "/home/blizarazu/Dropbox/Babelia/speech_aldatuta";
+	// static String saveFolder =
+	// "/home/blizarazu/Babelia/Angel_Heart-The_Egg_Scene";
+	// static String fileName = "babelia";
 
 	static String dictionary = "";
 	static String file = "";
@@ -80,14 +79,13 @@ public class Nagusia {
 
 			for (String esaldia : esaldiak) {
 				sortuEsaldikaGrammar(esaldia, h, esaldiak.indexOf(esaldia));
-				sortuEsaldikaOsoaGrammar(esaldia, h, esaldiak
-						.indexOf(esaldia));
+				sortuEsaldikaOsoaGrammar(esaldia, h, esaldiak.indexOf(esaldia));
 				sortuHitzKopurkaGrammar(esaldia, h, esaldiak.indexOf(esaldia));
 			}
 
 			sortuOsoaGrammar();
 
-			//sortuDfaJconf();
+			// sortuDfaJconf();
 
 			System.out.println(log);
 		} catch (FileNotFoundException e) {
@@ -125,8 +123,8 @@ public class Nagusia {
 		}
 	}
 
-	private static void sortuEsaldikaOsoaGrammar(String esaldia,
-			Hiztegia h, int lerroKont) {
+	private static void sortuEsaldikaOsoaGrammar(String esaldia, Hiztegia h,
+			int lerroKont) {
 		String name = "esaldika_osoa";
 
 		String esaldiPath = saveFolder + File.separator + lerroKont + "-"
@@ -232,8 +230,7 @@ public class Nagusia {
 				File f = new File(saveFolder + File.separator + azpiDir[i]);
 				if (f.isDirectory()) {
 					FileWriter fstream = new FileWriter(f.getPath()
-							+ File.separator + "osoa" + File.separator + name
-							+ ".grammar");
+							+ File.separator + name + ".grammar");
 					BufferedWriter out = new BufferedWriter(fstream);
 					out.write(grammarEdukia);
 					out.close();
@@ -272,51 +269,31 @@ public class Nagusia {
 	 * e.printStackTrace(); } }
 	 */
 
-	/*private static void sortuDfaJconf() {
-
-		String jconfEdukia = "-dfa " + fileName + ".dfa\n";
-		jconfEdukia += "-v " + fileName + ".dict\n";
-		jconfEdukia += "-h " + dictionary + File.separator + "hmmdefs\n";
-		jconfEdukia += "-hlist " + dictionary + File.separator + "tiedlist\n";
-		jconfEdukia += "-smpFreq 48000\n";
-
-		File dir = new File(saveFolder);
-		String[] azpiDir = dir.list();
-		for (int i = 0; i < azpiDir.length; i++) {
-			File f = new File(saveFolder + File.separator + azpiDir[i]);
-			if (f.isDirectory()) {
-				String[] azpiDir2 = f.list();
-				for (int j = 0; j < azpiDir2.length; j++) {
-					File f2 = new File(f.getAbsolutePath() + File.separator
-							+ azpiDir2[j]);
-					if (f2.isDirectory()) {
-						try {
-							String command = "mkdfa " + fileName;
-							Runtime.getRuntime().exec(command, null, f2);
-
-							try {
-								// Create file
-								FileWriter fstream = new FileWriter(f2
-										.getAbsolutePath()
-										+ File.separator + fileName + ".jconf");
-								BufferedWriter out = new BufferedWriter(fstream);
-								out.write(jconfEdukia);
-								// Close the output stream
-								out.close();
-							} catch (Exception e) {// Catch exception if any
-								log += "sortuDfaJconf: jconf; "
-										+ e.getMessage() + "\n";
-								System.err.println("Error: " + e.getMessage());
-							}
-
-						} catch (IOException e) {
-							log += "sortuDFA: mkdfa; " + e.getMessage() + "\n";
-							e.printStackTrace();
-						}
-					}
-				}
-			}
-		}
-	}*/
+	/*
+	 * private static void sortuDfaJconf() {
+	 * 
+	 * String jconfEdukia = "-dfa " + fileName + ".dfa\n"; jconfEdukia += "-v "
+	 * + fileName + ".dict\n"; jconfEdukia += "-h " + dictionary +
+	 * File.separator + "hmmdefs\n"; jconfEdukia += "-hlist " + dictionary +
+	 * File.separator + "tiedlist\n"; jconfEdukia += "-smpFreq 48000\n";
+	 * 
+	 * File dir = new File(saveFolder); String[] azpiDir = dir.list(); for (int
+	 * i = 0; i < azpiDir.length; i++) { File f = new File(saveFolder +
+	 * File.separator + azpiDir[i]); if (f.isDirectory()) { String[] azpiDir2 =
+	 * f.list(); for (int j = 0; j < azpiDir2.length; j++) { File f2 = new
+	 * File(f.getAbsolutePath() + File.separator + azpiDir2[j]); if
+	 * (f2.isDirectory()) { try { String command = "mkdfa " + fileName;
+	 * Runtime.getRuntime().exec(command, null, f2);
+	 * 
+	 * try { // Create file FileWriter fstream = new FileWriter(f2
+	 * .getAbsolutePath() + File.separator + fileName + ".jconf");
+	 * BufferedWriter out = new BufferedWriter(fstream); out.write(jconfEdukia);
+	 * // Close the output stream out.close(); } catch (Exception e) {// Catch
+	 * exception if any log += "sortuDfaJconf: jconf; " + e.getMessage() + "\n";
+	 * System.err.println("Error: " + e.getMessage()); }
+	 * 
+	 * } catch (IOException e) { log += "sortuDFA: mkdfa; " + e.getMessage() +
+	 * "\n"; e.printStackTrace(); } } } } } }
+	 */
 
 }
