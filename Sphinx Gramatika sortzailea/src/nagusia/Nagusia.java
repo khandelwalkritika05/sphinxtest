@@ -28,7 +28,7 @@ public class Nagusia {
 
 	static String log = "";
 
-	static Vector<String> voca;
+	static Vector<String> allWords;
 
 	static Vector<String> esaldiak;
 
@@ -48,7 +48,7 @@ public class Nagusia {
 		saveFolder = args[2];
 
 		Hiztegia h = new Hiztegia(dictionary);
-		voca = new Vector<String>();
+		allWords = new Vector<String>();
 		esaldiak = new Vector<String>();
 
 		try {
@@ -71,8 +71,8 @@ public class Nagusia {
 							.asList(lerroBerri.split(" ")));
 					for (String s : v) {
 						s = s.toLowerCase();
-						if (!voca.contains(s))
-							voca.addElement(s);
+						if (!allWords.contains(s))
+							allWords.addElement(s);
 					}
 				}
 			}
@@ -180,8 +180,8 @@ public class Nagusia {
 
 		grammarEdukia += "public <word> = ";
 
-		for (String word : voca) {
-			if (voca.indexOf(voca) > 0)
+		for (String word : allWords) {
+			if (allWords.indexOf(word) > 0)
 				grammarEdukia += " | ";
 			grammarEdukia += word;
 		}
@@ -210,8 +210,8 @@ public class Nagusia {
 
 		grammarEdukia += "public <word> = ";
 
-		for (String word : voca) {
-			if (voca.indexOf(voca) > 0)
+		for (String word : allWords) {
+			if (allWords.indexOf(word) > 0)
 				grammarEdukia += " | ";
 			grammarEdukia += word;
 		}
