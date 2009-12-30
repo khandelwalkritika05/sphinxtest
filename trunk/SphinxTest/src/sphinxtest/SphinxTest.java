@@ -47,6 +47,7 @@ public class SphinxTest {
 		microphone = (Microphone) cm.lookup("microphone");
 
 		this.logPath = logPath;
+		this.log = "";
 
 		loadSentences();
 		loadTestTypes();
@@ -149,36 +150,40 @@ public class SphinxTest {
 			break;
 		}
 
-		int resp1 = 0;
-		int resp2 = 0;
-
-		while (resp1 > -1) {
+		while (true) {
+			actualSentence = "";
+			
 			System.out.println("Select sentence:");
 			for (int i = 0; i < sentences.size(); i++)
 				System.out.println(i + " - " + sentences.get(i));
 
 			System.out.print("\nEnter number: ");
+			int resp1;
 			try {
 				BufferedReader br = new BufferedReader(new InputStreamReader(
 						System.in));
 				resp1 = Integer.parseInt(br.readLine());
 			} catch (IOException ioe) {
 				System.out.println("Invalid level number");
+				resp1 = -2;
 			} catch (NumberFormatException e) {
 				System.out.println("Invalid level number");
+				resp1 = -2;
 			}
 
 			if (resp1 > -1) {
 				actualSentence = sentences.get(resp1);
 
 				System.out.println();
-				while (resp2 > -1) {
+				while (true) {
+					actualTestType = "";
 					System.out.println("Select test type:");
 					for (int i = 0; i < testTypes.size(); i++)
 						System.out.println(i + " - " + testTypes.get(i));
 					System.out.println("-1 - Return");
 
 					System.out.print("\nEnter number: ");
+					int resp2;
 					try {
 						BufferedReader br = new BufferedReader(
 								new InputStreamReader(System.in));
@@ -186,10 +191,12 @@ public class SphinxTest {
 
 					} catch (IOException ioe) {
 						System.out.println("Invalid level number");
+						resp2 = -2;
 					} catch (NumberFormatException e) {
 						System.out.println("Invalid level number");
+						resp2 = -2;
 					}
-
+					
 					if (resp2 > -1) {
 						actualTestType = testTypes.get(resp2);
 
@@ -206,10 +213,11 @@ public class SphinxTest {
 							System.out.println("Grammar " + grammarName
 									+ " doesn't exist");
 						}
-					}
-					actualTestType = "";
+					}else if(resp2 == -1)
+						break;
 				}
-			}
+			}else if(resp1 == -1)
+				break;
 		}
 	}
 
@@ -247,12 +255,6 @@ public class SphinxTest {
 					results += "\n\n" + recogResultText + "\nINCORRECT";
 					incorrect++;
 				} else if (resp.equalsIgnoreCase("R")) {
-					writeLog();
-
-					actualSentence = "";
-
-					totalCorrect = 0;
-					totalIncorrect = 0;
 					break;
 				}
 			} else {
@@ -261,6 +263,11 @@ public class SphinxTest {
 		}
 
 		logResult(results, correct, incorrect, grammarName);
+		writeLog();
+		actualSentence = "";
+
+		totalCorrect = 0;
+		totalIncorrect = 0;
 	}
 
 	private void logResult(String results, int correct, int incorrect,
