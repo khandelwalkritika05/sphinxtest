@@ -68,7 +68,7 @@ public class Nagusia {
 
 				if (lerroBerri != null && lerroBerri.length() != 0) {
 					// lerroKont++;
-					esaldiak.addElement(lerroBerri);
+					esaldiak.addElement(lerroBerri.toLowerCase());
 					Vector<String> v = new Vector<String>(Arrays
 							.asList(lerroBerri.split(" ")));
 					for (String s : v) {
