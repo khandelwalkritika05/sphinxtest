@@ -49,6 +49,7 @@ public class Nagusia {
 		saveFolder = args[2];
 
 		Hiztegia h = new Hiztegia(dictionary);
+		
 		allWords = new Vector<String>();
 		esaldiak = new Vector<String>();
 		motak = new Vector<String>();
@@ -73,7 +74,7 @@ public class Nagusia {
 
 					boolean doPhrase = true;
 					for (String s : v) {
-						if (!h.contains(s)) {
+						if (!h.contains(s.toUpperCase())) {
 							doPhrase = false;
 							break;
 						}
