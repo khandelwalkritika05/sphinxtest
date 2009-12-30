@@ -230,7 +230,7 @@ public class Nagusia {
 			motak.addElement(name);
 
 		String grammarEdukia = "grammar " + name + ";\n\n";
-		grammarEdukia += "public <commands> = <words>*;\n\n";
+		grammarEdukia += "public <commands> = <word>*;\n\n";
 
 		grammarEdukia += "public <word> = ";
 
