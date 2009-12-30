@@ -7,7 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import edu.cmu.sphinx.frontend.util.Microphone;
 import edu.cmu.sphinx.jsapi.JSGFGrammar;
@@ -32,8 +33,8 @@ public class SphinxTest {
 
 	private String speakerLevel;
 
-	private ArrayList<String> sentences;
-	private ArrayList<String> testTypes;
+	private List<String> sentences;
+	private List<String> testTypes;
 
 	private static final String COMPLETE_GRAMMAR_NAME = "osoa";
 
@@ -52,11 +53,55 @@ public class SphinxTest {
 	}
 
 	private void loadSentences() {
-		sentences = new ArrayList<String>();
+		sentences = Arrays.asList("did you see him",
+				"no",
+				"why not",
+				"it would've been difficult",
+				"why",
+				"why because he's not there",
+				"johnny favorite walked out of the clinic years ago",
+				"in his best suit with a new face wrapped in bandages and a headache",
+				"he left with a guy called kelley and a girl",
+				"do you know this kelley",
+				"it seems this kelley paid off some bent doctor called fowler",
+				"to pinch hit for your guy",
+				"he's covered up for him all these years",
+				"looks like our johnny has a perfect disappearing act",
+				"it seems so",
+				"but you know what they say about slugs",
+				"no what do they say about slugs",
+				"they always leave slime in their tracks",
+				"you'll find him",
+				"no i won't find him",
+				"because i left out one little detail",
+				"this dr fowler ended up dead with his fucking brains blown out",
+				"did you kill him",
+				"but the cops might think i did",
+				"i took on a dollar dollars a-day missing persons job for you",
+				"now i'm a murder suspect",
+				"that's it i'm out",
+				"such are the hazards of your profession",
+				"if the fee bothers you we'll adjust it",
+				"you bother me",
+				"the closest i ever come to death is watching a hearse go by on nd avenue",
+				"that's the way i like it",
+				"are you afraid",
+				"yeah i'm afraid",
+				"i'll instruct my lawyer immediately to send you a check for dollar dollars",
+				"if you don't want the job i'll engage someone else",
+				"you want this johnny pretty bad eh",
+				"i don't like messy accounts",
+				"some religions think the egg is the symbol of the soul did you know that",
+				"would you like an egg",
+				"no thank you",
+				"i got a thing about chickens");
 	}
 
 	private void loadTestTypes() {
-		testTypes = new ArrayList<String>();
+		testTypes = Arrays.asList("esaldika",
+				"esaldika_osoa",
+				"hitz_kopuruka",
+				"osoa");
 	}
 
 	public void execute() {
@@ -237,6 +282,10 @@ public class SphinxTest {
 					+ "-------------------------------" + "Total correct: "
 					+ totalCorrect + " ; Total incorrect: " + totalIncorrect;
 
+			File file = new File(logPath);
+			if(!file.exists())
+				file.mkdir();
+			
 			try {
 				FileWriter fstream = new FileWriter(logPath + File.separator
 						+ actualSentence + "_" + speakerLevel + "_results");
@@ -255,7 +304,7 @@ public class SphinxTest {
 	 *            be saved
 	 */
 	public static void main(String[] args) {
-		if (args.length < 0) {
+		if (args.length < 1) {
 			System.out
 					.println("Missing parameters: Specify the folder for saving results");
 			System.exit(1);

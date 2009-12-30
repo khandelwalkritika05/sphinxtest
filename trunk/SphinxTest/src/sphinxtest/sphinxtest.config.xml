@@ -79,6 +79,7 @@
     <component name="flatLinguist" 
                 type="edu.cmu.sphinx.linguist.flat.FlatLinguist">
         <property name="logMath" value="logMath"/>
+        <property name="grammar" value="jsgfGrammar"/>
         <property name="acousticModel" value="wsj"/>
         <property name="wordInsertionProbability" 
                 value="1E-36"/>
@@ -95,6 +96,7 @@
         <property name="dictionary" value="dictionary"/>
         <property name="grammarLocation" 
              value="resource:/sphinxtest.SphinxTest!/sphinxtest/"/>
+        <property name="grammarName" value="osoa"/>
 	<property name="logMath" value="logMath"/>
     </component>
     
