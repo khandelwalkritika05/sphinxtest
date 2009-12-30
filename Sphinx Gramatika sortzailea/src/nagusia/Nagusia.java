@@ -93,10 +93,10 @@ public class Nagusia {
 
 			System.out.println("\n\n==============ESALDIAK==============\n");
 			for (String s1 : esaldiak)
-				System.out.println(s1);
+				System.out.println("\"" + s1 + "\"");
 			System.out.println("\n\n==============MOTAK==============\n");
 			for (String s2 : motak)
-				System.out.println(s2);
+				System.out.println("\"" + s2 + "\"");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
