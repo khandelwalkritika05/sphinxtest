@@ -35,6 +35,8 @@ public class SphinxTest {
 	private ArrayList<String> sentences;
 	private ArrayList<String> testTypes;
 
+	private static final String COMPLETE_GRAMMAR_NAME = "osoa";
+
 	public SphinxTest(String logPath) {
 		URL url = SphinxTest.class.getResource("sphinxtest.config.xml");
 		ConfigurationManager cm = new ConfigurationManager(url);
@@ -119,9 +121,9 @@ public class SphinxTest {
 			} catch (IOException ioe) {
 			} catch (NumberFormatException e) {
 			}
-			
+
 			actualSentence = sentences.get(resp1);
-			
+
 			System.out.println();
 			if (resp1 != 0) {
 				while (resp2 != 0) {
@@ -141,7 +143,11 @@ public class SphinxTest {
 
 					actualTestType = sentences.get(resp2);
 
-					String grammarName = actualSentence + "." + actualTestType;
+					String grammarName;
+					if (actualTestType.equals(COMPLETE_GRAMMAR_NAME))
+						grammarName = COMPLETE_GRAMMAR_NAME;
+					else
+						grammarName = actualSentence.replace(' ', '_') + "." + actualTestType;
 
 					try {
 						loadAndRecognize(grammarName);
@@ -152,9 +158,9 @@ public class SphinxTest {
 					actualTestType = "";
 				}
 				writeLog();
-				
+
 				actualSentence = "";
-				
+
 				totalCorrect = 0;
 				totalIncorrect = 0;
 			}
@@ -222,34 +228,36 @@ public class SphinxTest {
 		totalCorrect += correct;
 		totalIncorrect += incorrect;
 	}
-	
+
 	private void writeLog() {
 		if (!log.isEmpty()) {
-			log +=  "Speaker level: " + speakerLevel.toUpperCase() +
-					"Sentence: " + actualSentence +
-					"------------------------------" +
-					"\n\n\n" +
-					log +
-					"-------------------------------" +
-					"Total correct: " + totalCorrect + " ; Total incorrect: " + totalIncorrect;
-			
-			try{
-				FileWriter fstream = new FileWriter(logPath+File.separator+actualSentence+"_"+speakerLevel+"_results");
+			log += "Speaker level: " + speakerLevel.toUpperCase()
+					+ "Sentence: " + actualSentence
+					+ "------------------------------" + "\n\n\n" + log
+					+ "-------------------------------" + "Total correct: "
+					+ totalCorrect + " ; Total incorrect: " + totalIncorrect;
+
+			try {
+				FileWriter fstream = new FileWriter(logPath + File.separator
+						+ actualSentence + "_" + speakerLevel + "_results");
 				BufferedWriter out = new BufferedWriter(fstream);
 				out.write(log);
-			}catch (Exception e) {
-				System.out.println("Error writing results: " +e.getMessage());
+			} catch (Exception e) {
+				System.out.println("Error writing results: " + e.getMessage());
 			}
 
 		}
 	}
 
 	/**
-	 * @param args The path to the folder where the files with the results will be saved
+	 * @param args
+	 *            The path to the folder where the files with the results will
+	 *            be saved
 	 */
 	public static void main(String[] args) {
-		if(args.length < 0){
-			System.out.println("Prease specify the folder for saving results");
+		if (args.length < 0) {
+			System.out
+					.println("Missing parameters: Specify the folder for saving results");
 			System.exit(1);
 		}
 		SphinxTest sphinxTest = new SphinxTest(args[0]);

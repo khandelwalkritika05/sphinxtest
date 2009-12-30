@@ -5,7 +5,7 @@
 -->
 
 <!-- ******************************************************** -->
-<!--  jsgf demo configuration file                            -->
+<!--  sphinxtest configuration file                            -->
 <!-- ******************************************************** -->
 
 <config>        
@@ -79,7 +79,6 @@
     <component name="flatLinguist" 
                 type="edu.cmu.sphinx.linguist.flat.FlatLinguist">
         <property name="logMath" value="logMath"/>
-        <property name="grammar" value="jsgfGrammar"/>
         <property name="acousticModel" value="wsj"/>
         <property name="wordInsertionProbability" 
                 value="1E-36"/>
@@ -95,8 +94,7 @@
     <component name="jsgfGrammar" type="edu.cmu.sphinx.jsapi.JSGFGrammar">
         <property name="dictionary" value="dictionary"/>
         <property name="grammarLocation" 
-             value="resource:/edu.cmu.sphinx.demo.jsapi.jsgf.JSGFDemo!/edu/cmu/sphinx/demo/jsapi/jsgf/"/>
-        <property name="grammarName" value="commands"/>
+             value="resource:/sphinxtest.SphinxTest!/sphinxtest/"/>
 	<property name="logMath" value="logMath"/>
     </component>
     
