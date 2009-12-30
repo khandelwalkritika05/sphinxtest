@@ -53,59 +53,58 @@ public class SphinxTest {
 	}
 
 	private void loadSentences() {
-		sentences = Arrays.asList("did you see him",
-				"no",
-				"why not",
-				"it would've been difficult",
-				"why",
-				"why because he's not there",
-				"johnny favorite walked out of the clinic years ago",
-				"in his best suit with a new face wrapped in bandages and a headache",
-				"he left with a guy called kelley and a girl",
-				"do you know this kelley",
-				"it seems this kelley paid off some bent doctor called fowler",
-				"to pinch hit for your guy",
-				"he's covered up for him all these years",
-				"looks like our johnny has a perfect disappearing act",
-				"it seems so",
-				"but you know what they say about slugs",
-				"no what do they say about slugs",
-				"they always leave slime in their tracks",
-				"you'll find him",
-				"no i won't find him",
-				"because i left out one little detail",
-				"this dr fowler ended up dead with his fucking brains blown out",
-				"did you kill him",
-				"but the cops might think i did",
-				"i took on a dollar dollars a-day missing persons job for you",
-				"now i'm a murder suspect",
-				"that's it i'm out",
-				"such are the hazards of your profession",
-				"if the fee bothers you we'll adjust it",
-				"you bother me",
-				"the closest i ever come to death is watching a hearse go by on nd avenue",
-				"that's the way i like it",
-				"are you afraid",
-				"yeah i'm afraid",
-				"i'll instruct my lawyer immediately to send you a check for dollar dollars",
-				"if you don't want the job i'll engage someone else",
-				"you want this johnny pretty bad eh",
-				"i don't like messy accounts",
-				"some religions think the egg is the symbol of the soul did you know that",
-				"would you like an egg",
-				"no thank you",
-				"i got a thing about chickens");
+		sentences = Arrays
+				.asList(
+						"did you see him",
+						"no",
+						"why not",
+						"it would've been difficult",
+						"why",
+						"why because he's not there",
+						"johnny favorite walked out of the clinic years ago",
+						"in his best suit with a new face wrapped in bandages and a headache",
+						"he left with a guy called kelley and a girl",
+						"do you know this kelley",
+						"it seems this kelley paid off some bent doctor called fowler",
+						"to pinch hit for your guy",
+						"he's covered up for him all these years",
+						"looks like our johnny has a perfect disappearing act",
+						"it seems so",
+						"but you know what they say about slugs",
+						"no what do they say about slugs",
+						"they always leave slime in their tracks",
+						"you'll find him",
+						"no i won't find him",
+						"because i left out one little detail",
+						"this dr fowler ended up dead with his fucking brains blown out",
+						"did you kill him",
+						"but the cops might think i did",
+						"i took on a dollar dollars a-day missing persons job for you",
+						"now i'm a murder suspect",
+						"that's it i'm out",
+						"such are the hazards of your profession",
+						"if the fee bothers you we'll adjust it",
+						"you bother me",
+						"the closest i ever come to death is watching a hearse go by on nd avenue",
+						"that's the way i like it",
+						"are you afraid",
+						"yeah i'm afraid",
+						"i'll instruct my lawyer immediately to send you a check for dollar dollars",
+						"if you don't want the job i'll engage someone else",
+						"you want this johnny pretty bad eh",
+						"i don't like messy accounts",
+						"some religions think the egg is the symbol of the soul did you know that",
+						"would you like an egg", "no thank you",
+						"i got a thing about chickens");
 	}
 
 	private void loadTestTypes() {
-		testTypes = Arrays.asList("esaldika",
-				"esaldika_osoa",
-				"hitz_kopuruka",
+		testTypes = Arrays.asList("esaldika", "esaldika_osoa", "hitz_kopuruka",
 				"osoa");
 	}
 
 	public void execute() {
-		System.out.println("SphixTest\n");
+		System.out.println("SphinxTest\n");
 
 		System.out.println("Loading recognizer...");
 		recognizer.allocate();
@@ -150,10 +149,10 @@ public class SphinxTest {
 			break;
 		}
 
-		int resp1 = -1;
-		int resp2 = -1;
+		int resp1 = 0;
+		int resp2 = 0;
 
-		while (resp1 != 0) {
+		while (resp1 > -1) {
 			System.out.println("Select sentence:");
 			for (int i = 0; i < sentences.size(); i++)
 				System.out.println(i + " - " + sentences.get(i));
@@ -164,17 +163,20 @@ public class SphinxTest {
 						System.in));
 				resp1 = Integer.parseInt(br.readLine());
 			} catch (IOException ioe) {
+				System.out.println("Invalid level number");
 			} catch (NumberFormatException e) {
+				System.out.println("Invalid level number");
 			}
 
-			actualSentence = sentences.get(resp1);
+			if (resp1 > -1) {
+				actualSentence = sentences.get(resp1);
 
-			System.out.println();
-			if (resp1 != 0) {
-				while (resp2 != 0) {
+				System.out.println();
+				while (resp2 > -1) {
 					System.out.println("Select test type:");
 					for (int i = 0; i < testTypes.size(); i++)
 						System.out.println(i + " - " + testTypes.get(i));
+					System.out.println("-1 - Return");
 
 					System.out.print("\nEnter number: ");
 					try {
@@ -183,22 +185,27 @@ public class SphinxTest {
 						resp2 = Integer.parseInt(br.readLine());
 
 					} catch (IOException ioe) {
+						System.out.println("Invalid level number");
 					} catch (NumberFormatException e) {
+						System.out.println("Invalid level number");
 					}
 
-					actualTestType = sentences.get(resp2);
+					if (resp2 > -1) {
+						actualTestType = testTypes.get(resp2);
 
-					String grammarName;
-					if (actualTestType.equals(COMPLETE_GRAMMAR_NAME))
-						grammarName = COMPLETE_GRAMMAR_NAME;
-					else
-						grammarName = actualSentence.replace(' ', '_') + "." + actualTestType;
+						String grammarName;
+						if (actualTestType.equals(COMPLETE_GRAMMAR_NAME))
+							grammarName = COMPLETE_GRAMMAR_NAME;
+						else
+							grammarName = actualSentence.replace(' ', '_')
+									+ "_" + actualTestType;
 
-					try {
-						loadAndRecognize(grammarName);
-					} catch (IOException e) {
-						System.out.println("Grammar " + grammarName
-								+ " doesn't exist");
+						try {
+							loadAndRecognize(grammarName);
+						} catch (IOException e) {
+							System.out.println("Grammar " + grammarName
+									+ " doesn't exist");
+						}
 					}
 					actualTestType = "";
 				}
@@ -283,14 +290,15 @@ public class SphinxTest {
 					+ totalCorrect + " ; Total incorrect: " + totalIncorrect;
 
 			File file = new File(logPath);
-			if(!file.exists())
+			if (!file.exists())
 				file.mkdir();
-			
+
 			try {
 				FileWriter fstream = new FileWriter(logPath + File.separator
-						+ actualSentence + "_" + speakerLevel + "_results");
+						+ actualSentence.replace(" ", "_") + "_" + speakerLevel + "_results");
 				BufferedWriter out = new BufferedWriter(fstream);
 				out.write(log);
+				out.close();
 			} catch (Exception e) {
 				System.out.println("Error writing results: " + e.getMessage());
 			}
