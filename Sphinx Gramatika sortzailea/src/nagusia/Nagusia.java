@@ -180,12 +180,9 @@ public class Nagusia {
 
 		grammarEdukia += "public <word> = ";
 
-		boolean first = true;
 		for (String word : voca) {
-			if (!first) {
+			if (voca.indexOf(voca) > 0)
 				grammarEdukia += " | ";
-				first = false;
-			}
 			grammarEdukia += word;
 		}
 		grammarEdukia += ";";
@@ -213,12 +210,9 @@ public class Nagusia {
 
 		grammarEdukia += "public <word> = ";
 
-		boolean first = true;
 		for (String word : voca) {
-			if (!first) {
+			if (voca.indexOf(voca) > 0)
 				grammarEdukia += " | ";
-				first = false;
-			}
 			grammarEdukia += word;
 		}
 		grammarEdukia += ";";
