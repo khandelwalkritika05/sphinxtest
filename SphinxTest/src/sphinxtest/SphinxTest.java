@@ -298,7 +298,8 @@ public class SphinxTest {
 					+ totalIncorrect;
 			log = header + "\n\n\n=======RESULTS======\n" + log;
 
-			File file = new File(logPath);
+			File file = new File(logPath + File.separator
+					+ speakerLevel);
 			if (!file.exists())
 				file.mkdir();
 
