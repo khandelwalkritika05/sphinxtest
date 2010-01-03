@@ -152,7 +152,7 @@ public class SphinxTest {
 
 		while (true) {
 			actualSentence = "";
-			
+
 			System.out.println("Select sentence:");
 			for (int i = 0; i < sentences.size(); i++)
 				System.out.println(i + " - " + sentences.get(i));
@@ -196,7 +196,7 @@ public class SphinxTest {
 						System.out.println("Invalid level number");
 						resp2 = -2;
 					}
-					
+
 					if (resp2 > -1) {
 						actualTestType = testTypes.get(resp2);
 
@@ -213,7 +213,7 @@ public class SphinxTest {
 							System.out.println("Grammar " + grammarName
 									+ " doesn't exist");
 						}
-					}else if(resp2 == -1){
+					} else if (resp2 == -1) {
 						writeLog();
 						actualSentence = "";
 
@@ -222,7 +222,7 @@ public class SphinxTest {
 						break;
 					}
 				}
-			}else if(resp1 == -1)
+			} else if (resp1 == -1)
 				break;
 		}
 	}
@@ -235,7 +235,7 @@ public class SphinxTest {
 		int incorrect = 0;
 
 		while (true) {
-			System.out.println("Start speaking.\n");
+			System.out.println("Start speaking: " + actualSentence + "\n");
 
 			Result recogResult = recognizer.recognize();
 			if (recogResult != null) {
@@ -273,7 +273,6 @@ public class SphinxTest {
 
 	private void logResult(String results, int correct, int incorrect,
 			String grammarName) {
-		log = "";
 		log += "=============================================================================\n";
 		log += "  Sentence: " + actualSentence + "\n";
 		log += "  Test type: " + actualTestType + "\n";
@@ -295,8 +294,8 @@ public class SphinxTest {
 			String header = "Speaker level: " + speakerLevel.toUpperCase()
 					+ "\n" + "Sentence: " + actualSentence + "\n"
 					+ "------------------------------" + "\n\n\n"
-					+ "Total correct: "
-					+ totalCorrect + " ; Total incorrect: " + totalIncorrect;
+					+ "Total correct: " + totalCorrect + " ; Total incorrect: "
+					+ totalIncorrect;
 			log = header + "\n\n\n=======RESULTS======\n" + log;
 
 			File file = new File(logPath);
@@ -305,11 +304,13 @@ public class SphinxTest {
 
 			try {
 				FileWriter fstream = new FileWriter(logPath + File.separator
+						+ speakerLevel + File.separator
 						+ actualSentence.replace(" ", "_") + "_" + speakerLevel
 						+ "_results");
 				BufferedWriter out = new BufferedWriter(fstream);
 				out.write(log);
 				out.close();
+				log = "";
 			} catch (Exception e) {
 				System.out.println("Error writing results: " + e.getMessage());
 			}
