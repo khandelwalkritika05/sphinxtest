@@ -76,6 +76,7 @@ public class Nagusia {
 					for (String s : v) {
 						if (!h.contains(s.toUpperCase())) {
 							doPhrase = false;
+							System.out.println("Word " + s + " not found. Skiping phrase \"" + lerroBerri + "\"");
 							break;
 						}
 					}
