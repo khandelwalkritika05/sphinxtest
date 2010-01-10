@@ -100,7 +100,7 @@ public class Nagusia {
 
 			sortuOsoaGrammar();
 
-			// sortuDfaJconf();
+			sortuChooseGrammar();
 
 			System.out.println(log);
 
@@ -266,5 +266,41 @@ public class Nagusia {
 			log += "makeHitzKopurkaGrammar: " + e.getMessage() + "\n";
 			System.err.println("Error: " + e.getMessage());
 		}
+	}
+	
+	private static void sortuChooseGrammar(){
+			String name = "choose";
+			if (!motak.contains(name))
+				motak.addElement(name);
+
+			// String esaldiPath = saveFolder + File.separator + lerroKont + "-"
+			// + esaldia.replace(' ', '_');
+
+			File file = new File(saveFolder);
+			if (!file.exists())
+				file.mkdirs();
+
+			String grammarEdukia = "grammar " + name + ";\n\n";
+			grammarEdukia += "public <commands> = ";
+			for(String esaldia: esaldiak){
+				if (esaldia.indexOf(esaldia) > 0)
+					grammarEdukia += " | ";
+				grammarEdukia += "( " + esaldia.toLowerCase() + " )";
+			}
+			grammarEdukia += ";";
+
+			try {
+				// Create file
+				FileWriter fstream = new FileWriter(saveFolder + File.separator
+						+ "choose_" + name + ".gram");
+				BufferedWriter out = new BufferedWriter(fstream);
+				out.write(grammarEdukia);
+				// Close the output stream
+				out.close();
+				log += "GRAMMAR CREATED: " + name
+						+ ".gram\n";
+			} catch (Exception e) {// Catch exception if any
+				System.err.println("Error: " + e.getMessage());
+			}
 	}
 }
