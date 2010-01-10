@@ -16,35 +16,45 @@ public class Nagusia {
 
 	// static String dicFile =
 	// "/home/blizarazu/Babelia/acoustic_model_files/dict";
-	
-	/*static String acModelFile = "/home/blizarazu/Babelia/acoustic_model_files";
-	static String file = "/home/blizarazu/Dropbox/Babelia/speech_aldatuta";
-	static String saveFolder = "/home/blizarazu/Babelia/Angel_Heart-The_Egg_Scene";
-	static String fileName = "babelia";*/
-	
+
+	/*
+	 * static String acModelFile =
+	 * "/home/blizarazu/Babelia/acoustic_model_files"; static String file =
+	 * "/home/blizarazu/Dropbox/Babelia/speech_aldatuta"; static String
+	 * saveFolder = "/home/blizarazu/Babelia/Angel_Heart-The_Egg_Scene"; static
+	 * String fileName = "babelia";
+	 */
+
 	static String acModelFile = "";
 	static String file = "";
 	static String saveFolder = "";
 	static String fileName = "";
-	
+
 	static String log = "";
 
 	static HashMap<String, Vector<String>> voca;
+
+	static String chooseGrammarEdukia;
+	static String chooseVocaEdukia;
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
-		if(args.length < 3){
-			System.out.println("Missing parameters: specify the foldel with the acoustic model files, the file with text, the name for the grammar files and the folder for saving the grammar files");
+
+		if (args.length < 3) {
+			System.out
+					.println("Missing parameters: specify the foldel with the acoustic model files, the file with text, the name for the grammar files and the folder for saving the grammar files");
 			System.exit(1);
 		}
-		
+
 		acModelFile = args[0];
 		file = args[1];
 		fileName = args[2];
 		saveFolder = args[3];
+
+		chooseGrammarEdukia = "S : NS_B SENT NS_E\n";
+		chooseVocaEdukia = "% NS_B\n<s>\tsil\n\n% NS_E\n</s>\tsil\n\n";
 
 		Hiztegia h = new Hiztegia(acModelFile + File.separator + "dict");
 		voca = new HashMap<String, Vector<String>>();
@@ -73,6 +83,8 @@ public class Nagusia {
 			sortuOsoaGrammar();
 			sortuOsoaVoca();
 
+			sortuChooseGrammarVoca();
+			
 			sortuDfaJconf();
 
 			System.out.println(log);
@@ -92,11 +104,15 @@ public class Nagusia {
 		File file = new File(esaldiPath);
 		if (!file.exists())
 			file.mkdirs();
-		String grammarEdukia = "S : NS_B SENT NS_E\nSENT: ";
-		grammarEdukia += esaldia.toUpperCase() + "\n";
 
-		String vocaEdukia = "% NS_B\n<s>\tsil\n\n% NS_E\n</s>\tsil\n\n";
+		String grammarHeader = "S : NS_B SENT NS_E\n";
+		String grammarEdukia = "SENT: " + esaldia.toUpperCase() + "\n";
+		chooseGrammarEdukia += grammarEdukia;
+		grammarEdukia = grammarHeader + grammarEdukia;
 
+		String vocaHeader = "% NS_B\n<s>\tsil\n\n% NS_E\n</s>\tsil\n\n";
+
+		String vocaEdukia = "";
 		Vector<String> v = new Vector<String>(Arrays.asList(esaldia.split(" ")));
 		for (String s : v) {
 			s = s.toUpperCase();
@@ -115,6 +131,9 @@ public class Nagusia {
 						+ "sortuEsaldikaGrammarVoca: " + s
 						+ " hitza ez da aurkitu.\n";
 		}
+
+		chooseVocaEdukia += vocaEdukia;
+		vocaEdukia = vocaHeader + vocaEdukia;
 
 		try {
 			// Create file
@@ -140,9 +159,9 @@ public class Nagusia {
 			System.err.println("Error: " + e.getMessage());
 		}
 	}
-	
-	private static void sortuEsaldikaOsoaGrammarVoca(String esaldia, Hiztegia h,
-			int lerroKont) {
+
+	private static void sortuEsaldikaOsoaGrammarVoca(String esaldia,
+			Hiztegia h, int lerroKont) {
 
 		String esaldiPath = saveFolder + File.separator + lerroKont + "-"
 				+ esaldia.replace(' ', '_') + File.separator + "esaldika_osoa";
@@ -150,7 +169,7 @@ public class Nagusia {
 		File file = new File(esaldiPath);
 		if (!file.exists())
 			file.mkdirs();
-		
+
 		String grammarEdukia = "S : NS_B ";
 		int hitzKop = esaldia.toUpperCase().split(" ").length;
 		for (int i = 0; i < hitzKop; i++)
@@ -302,6 +321,39 @@ public class Nagusia {
 		} catch (IOException e) {
 			log += "sortuOsoaGrammar: " + e.getMessage() + "\n";
 			e.printStackTrace();
+		}
+	}
+
+	private static void sortuChooseGrammarVoca() {
+		String esaldiPath = saveFolder + File.separator + "All"
+				+ File.separator + "choose";
+
+		File file = new File(esaldiPath);
+		if (!file.exists())
+			file.mkdirs();
+
+		try {
+			// Create file
+			FileWriter fstream = new FileWriter(esaldiPath + File.separator
+					+ fileName + ".grammar");
+			BufferedWriter out = new BufferedWriter(fstream);
+			out.write(chooseGrammarEdukia);
+			// Close the output stream
+			out.close();
+		} catch (Exception e) {// Catch exception if any
+			System.err.println("Error: " + e.getMessage());
+		}
+
+		try {
+			// Create file
+			FileWriter fstream = new FileWriter(esaldiPath + File.separator
+					+ fileName + ".voca");
+			BufferedWriter out = new BufferedWriter(fstream);
+			out.write(chooseVocaEdukia);
+			// Close the output stream
+			out.close();
+		} catch (Exception e) {// Catch exception if any
+			System.err.println("Error: " + e.getMessage());
 		}
 	}
 
