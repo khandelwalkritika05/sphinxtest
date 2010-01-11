@@ -17,13 +17,12 @@ public class Nagusia {
 	// static String dicFile =
 	// "/home/blizarazu/Babelia/acoustic_model_files/dict";
 
-	/*
-	 * static String acModelFile =
-	 * "/home/blizarazu/Babelia/acoustic_model_files"; static String file =
-	 * "/home/blizarazu/Dropbox/Babelia/speech_aldatuta"; static String
-	 * saveFolder = "/home/blizarazu/Babelia/Angel_Heart-The_Egg_Scene"; static
-	 * String fileName = "babelia";
-	 */
+	// static String acModelFile =
+	// "/home/blizarazu/Babelia/acoustic_model_files";
+	// static String file = "/home/blizarazu/Dropbox/Babelia/speech_aldatuta";
+	// static String saveFolder =
+	// "/home/blizarazu/Babelia/Angel_Heart-The_Egg_Scene";
+	// static String fileName = "babelia";
 
 	static String acModelFile = "";
 	static String file = "";
@@ -84,7 +83,7 @@ public class Nagusia {
 			sortuOsoaVoca();
 
 			sortuChooseGrammarVoca();
-			
+
 			sortuDfaJconf();
 
 			System.out.println(log);
@@ -106,7 +105,8 @@ public class Nagusia {
 			file.mkdirs();
 
 		String grammarHeader = "S : NS_B SENT NS_E\n";
-		String grammarEdukia = "SENT: " + esaldia.toUpperCase() + "\n";
+		String grammarEdukia = "SENT: "
+				+ esaldia.toUpperCase().replace("'", "") + "\n";
 		chooseGrammarEdukia += grammarEdukia;
 		grammarEdukia = grammarHeader + grammarEdukia;
 
@@ -114,22 +114,26 @@ public class Nagusia {
 
 		String vocaEdukia = "";
 		Vector<String> v = new Vector<String>(Arrays.asList(esaldia.split(" ")));
+		Vector<String> done = new Vector<String>();
 		for (String s : v) {
 			s = s.toUpperCase();
-			vocaEdukia += "% " + s + "\n";
-			if (h.containsKey(s)) {
-				Vector<String> fon = h.get(s);
-				if (!voca.containsKey(s))
-					voca.put(s, fon);
-				vocaEdukia += s + "\t";
-				for (String f : fon)
-					if (!f.equals("sp"))
-						vocaEdukia += " " + f;
-				vocaEdukia += "\n\n";
-			} else
-				log += "lerroa:" + lerroKont + "; "
-						+ "sortuEsaldikaGrammarVoca: " + s
-						+ " hitza ez da aurkitu.\n";
+			if (!done.contains(s)) {
+				vocaEdukia += "% " + s.replace("'", "") + "\n";
+				if (h.containsKey(s)) {
+					Vector<String> fon = h.get(s);
+					if (!voca.containsKey(s))
+						voca.put(s, fon);
+					vocaEdukia += s + "\t";
+					for (String f : fon)
+						if (!f.equals("sp"))
+							vocaEdukia += " " + f;
+					vocaEdukia += "\n\n";
+					done.addElement(s);
+				} else
+					log += "lerroa:" + lerroKont + "; "
+							+ "sortuEsaldikaGrammarVoca: " + s
+							+ " hitza ez da aurkitu.\n";
+			}
 		}
 
 		chooseVocaEdukia += vocaEdukia;
