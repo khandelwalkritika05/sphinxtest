@@ -272,7 +272,7 @@ public class SphinxTest {
 			File file = new File(logPath + File.separator
 					+ speakerLevel);
 			if (!file.exists())
-				file.mkdir();
+				file.mkdirs();
 
 			try {
 				FileWriter fstream = new FileWriter(logPath + File.separator
